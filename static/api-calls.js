@@ -1,18 +1,33 @@
+function convertToSlug(Text)
+{
+    return Text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+        ;
+}
+
 $('#sentiment-submit').click(() => {
     let query = $('#sentiment-query').val();
     if (query == '') {
         flash('Must input text to query sentiment classifier.');
     } else {
+        query = convertToSlug(query)
         let url = 'http://127.0.0.1:5000/api/sentiment?query=' + query;
         console.log('Querying url: ' + url);
         $.ajax({
             url: url,
             success: function(data) {
-                console.log(data);
                 let sentiment = data['prediction']
                 let confidence = data['confidence']
-                $('#neg-pos').html(sentiment);
-                $('#sentiment-confidence').html(confidence);
+                let answer = confidence + "% sure it's " + sentiment;
+                console.log(answer);
+                $('#sentiment-answer').html(answer);
+                if (sentiment == "Negative") {
+                    $('#sentiment-answer').removeClass('text-success').addClass('text-danger')
+                } else {
+                    $('#sentiment-answer').removeClass('text-danger').addClass('text-success')
+                }
             }
         })
     }

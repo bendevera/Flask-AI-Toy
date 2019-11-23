@@ -35,7 +35,8 @@ class PredictSentiment(Resource):
     def get(self):
         # use parser and find the user's query
         args = parser.parse_args()
-        user_query = args['query']
+        user_query = args['query'].replace("-", " ")
+        print(user_query)
 
         # vectorize the user's query and make a prediction
         uq_vectorized = model.vectorizer_transform(np.array([user_query]))
@@ -49,7 +50,7 @@ class PredictSentiment(Resource):
             pred_text = 'Positive'
 
         # round the predict proba value and set to new variable
-        confidence = round(pred_proba[0], 3)
+        confidence = round(pred_proba[0], 2)
 
         # create JSON object
         output = {'prediction': pred_text, 'confidence': confidence}
@@ -63,9 +64,9 @@ class PredictDiamond(Resource):
         carat = float(args['carat'])
         cut = float(args['cut'])
 
-        prediction = model_two.predict([[carat, cut]])
+        prediction = '~$' + str(round(float(model_two.predict([[carat, cut]])[0]), 2))
         print(prediction)
-        return {'prediction': prediction[0]}
+        return {'prediction': prediction}
 
 # Setup the API Resources routing here
 api.add_resource(PredictSentiment, '/api/sentiment')

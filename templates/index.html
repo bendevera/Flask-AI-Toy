@@ -3,47 +3,88 @@
     <head>
         <title>AI Toy Frontend</title>
         <link href='../static/style.css' type='text/css' />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <div class='nav'>
-            <div>brand</div>
-            <ul>
-                <li>Sentiment Classifier</li>
-                <li>Diamond Price Predictor</li>
-            </ul>
-        </div>
-        <div class='main'>
-            <div class='sentiment-section'>
-                <h2>Sentiment Classifier</h2>
-                <input type='text' id='sentiment-query' />
-                <button id='sentiment-submit'>Submit</button>
-                <div class='sentiment-result'>
-                    <ul>
-                        <li id='neg-pos'></li>
-                        <li id='sentiment-confidence'></li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Flask AI Toy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Sentiment Classifier</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Diamond Price Predictor</a>
+                    </li>
+                </ul>
             </div>
-            <div class='diamond-section'>
-                <h2>Diamond Price Predictor</h2>
-                <input type='number' id='diamond-carat' />
-                <select id='diamond-cut'>
-                    <option value='1'>Bad</option>
-                    <option value='2'>Okay</option>
-                    <option value='3'>Good</option>
-                    <option value='4'>Very Good</option>
-                    <option value='5'>Tremendous</option>
-                </select>
-                <button id='diamond-submit'>Submit</button>
-                <div class='diamond-result'>
-                    <p id='diamond-price'></p>
+        </nav>
+
+        <div class='main container'>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card my-3" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Sentiment Classifier</h5>
+                            <p class="card-text">Enter in a phrase or sentence and the model will tell you if it's negative or positive.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><input type='text' id='sentiment-query' /></li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" id='sentiment-submit' class="card-link">Submit</a>
+                            <p id="sentiment-answer"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card my-3" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Diamond Price Predictor</h5>
+                            <p class="card-text">Enter the carat and cut quality of the diamond to get an estimate of the price!</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><input type='number' id='diamond-carat' /></li>
+                            <li class="list-group-item">
+                                <select id='diamond-cut'>
+                                    <option value='1'>Bad</option>
+                                    <option value='2'>Okay</option>
+                                    <option value='3'>Good</option>
+                                    <option value='4'>Very Good</option>
+                                    <option value='5'>Tremendous</option>
+                                </select>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" id='diamond-submit' class="card-link">Submit</a>
+                            <p id="diamond-price" class="text-success"></p>
+                        </div>
+                    </div>
+                    <!-- <div class='diamond-section'>
+                        <h2>Diamond Price Predictor</h2>
+                        <select id='diamond-cut'>
+                            <option value='1'>Bad</option>
+                            <option value='2'>Okay</option>
+                            <option value='3'>Good</option>
+                            <option value='4'>Very Good</option>
+                            <option value='5'>Tremendous</option>
+                        </select>
+                        <button id='diamond-submit'>Submit</button>
+
+                        <div class='diamond-result'>
+                            <p id='diamond-price'></p>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </body>
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src='../static/api-calls.js'></script>
 </html>
