@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AI Toy Frontend</title>
+        <link href='../static/style.css' type='text/css' />
+    </head>
+    <body>
+        <div class='nav'>
+            <div>brand</div>
+            <ul>
+                <li>Sentiment Classifier</li>
+                <li>Diamond Price Predictor</li>
+            </ul>
+        </div>
+        <div class='main'>
+            <div class='sentiment-section'>
+                <h2>Sentiment Classifier</h2>
+                <input type='text' id='sentiment-query' />
+                <button id='sentiment-submit'>Submit</button>
+                <div class='sentiment-result'>
+                    <ul>
+                        <li id='neg-pos'></li>
+                        <li id='sentiment-confidence'></li>
+                    </ul>
+                </div>
+            </div>
+            <div class='diamond-section'>
+                <h2>Diamond Price Predictor</h2>
+                <input type='number' id='diamond-carat' />
+                <select id='diamond-cut'>
+                    <option value='1'>Bad</option>
+                    <option value='2'>Okay</option>
+                    <option value='3'>Good</option>
+                    <option value='4'>Very Good</option>
+                    <option value='5'>Tremendous</option>
+                </select>
+                <button id='diamond-submit'>Submit</button>
+                <div class='diamond-result'>
+                    <p id='diamond-price'></p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src='../static/api-calls.js'></script>
+</html>
