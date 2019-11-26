@@ -4,6 +4,8 @@ import pickle
 import numpy as np
 from model import NLPModel, DiamondPredictor
 from flask_cors import CORS
+from keras.models import load_model
+import cv2
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -23,6 +25,16 @@ with open(vec_path, 'rb') as f:
 regressor_path = 'lib/models/DiamondPredictor.sav'
 with open(regressor_path, 'rb') as f:
     model_two.predictor = pickle.load(f) 
+
+cat_dog_clf_path = 'lib/models/cats_and_dogs_v1.h5'
+cat_dog_model = load_model(cat_dog_clf_path)
+cat_dog_model.compile(loss='binary_crossentropy',
+            optimizer='rmsprop',
+            metrics=['accuracy'])
+img = cv2.imread('lib/data/test_dog.jpg')
+img = cv2.resize(img,(150,150))
+img = np.reshape(img,[1,150,150,3])
+print(cat_dog_model.predict(img))
 
 # argument parsing
 parser = reqparse.RequestParser()
@@ -68,9 +80,21 @@ class PredictDiamond(Resource):
         print(prediction)
         return {'prediction': prediction}
 
+class CatAndDogPredictor(Resource):
+    def get(self):
+        args = parser.parse_args()
+        curr_img = cv2.imread('lib/data/test_dog.jpg')
+        curr_img = cv2.resize(curr_img,(150,150))
+        curr_img = np.reshape(curr_img,[1,150,150,3])
+        prediction = cat_dog_model.predict(curr_img)
+        print(prediction)
+        return {'prediction': prediction}
+
+
 # Setup the API Resources routing here
 api.add_resource(PredictSentiment, '/api/sentiment')
 api.add_resource(PredictDiamond, '/api/diamond')
+api.add_resource(CatAndDogPredictor, '/api/cat-and-dog')
 
 @app.route('/')
 def index():
