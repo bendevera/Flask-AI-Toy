@@ -10,7 +10,7 @@ function convertToSlug(Text)
 $('#sentiment-submit').click(() => {
     let query = $('#sentiment-query').val();
     if (query == '') {
-        flash('Must input text to query sentiment classifier.');
+        alert('Must input text to query sentiment classifier.');
     } else {
         query = convertToSlug(query)
         let url = 'http://127.0.0.1:5000/api/sentiment?query=' + query;
@@ -18,15 +18,19 @@ $('#sentiment-submit').click(() => {
         $.ajax({
             url: url,
             success: function(data) {
-                let sentiment = data['prediction']
-                let confidence = data['confidence']
-                let answer = confidence + "% sure it's " + sentiment;
-                console.log(answer);
-                $('#sentiment-answer').html(answer);
-                if (sentiment == "Negative") {
-                    $('#sentiment-answer').removeClass('text-success').addClass('text-danger')
+                if (data['success']) {
+                    console.log(data)
+                    let answer = data['message']
+                    let sentiment = data['sentiment']
+                    console.log(answer);
+                    $('#sentiment-answer').html(answer);
+                    if (sentiment == "Negative") {
+                        $('#sentiment-answer').removeClass('text-success').addClass('text-danger')
+                    } else {
+                        $('#sentiment-answer').removeClass('text-danger').addClass('text-success')
+                    }
                 } else {
-                    $('#sentiment-answer').removeClass('text-danger').addClass('text-success')
+                    alert('Was not a success')
                 }
             }
         })
@@ -38,7 +42,7 @@ $('#diamond-submit').click(() => {
     let cut = $('#diamond-cut').val();
     console.log('Query is carat: ' + carat + ' cut: ' + cut);
     if (carat === null) {
-        flash('Must input carat value to get prediction.');
+        alert('Must input carat value to get prediction.');
     } else {
         let url = 'http://127.0.0.1:5000/api/diamond?carat=' + carat + '&cut=' + cut;
         console.log('Querying url: ' + url);
@@ -46,9 +50,33 @@ $('#diamond-submit').click(() => {
             url: url,
             success: function(data) {
                 console.log(data);
-                let price = data['prediction']
-                $('#diamond-price').html(price);
+                if (data['success']) {
+                    let price = data['message']
+                    $('#diamond-price').html(price);
+                }
             }
         })
     }
 })
+
+$("#cat-dog-submit").click(() => {
+    var fd = new FormData();
+    var files = $('#file')[0].files[0];
+    fd.append('file',files);
+
+    $.ajax({
+        url: 'http://127.0.0.1:5000/api/cat-and-dog',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            console.log(data)
+            if (data['success']) {
+                $("#cat-dog-answer").html(data['message'])
+            } else {
+                alert(data['message'])
+            }
+        },
+    });
+});

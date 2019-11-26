@@ -17,9 +17,9 @@ flask-restful = "*"
 seaborn = "*"
 flask-cors = "*"
 keras = "*"
-tensorflow = "*"
 pillow = "*"
 opencv-python = "*"
+tensorflow = "==1.14"
 
 [requires]
 python_version = "3.6"

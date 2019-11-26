@@ -1,11 +1,10 @@
-# ML imports
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LinearRegression 
 from sklearn.feature_extraction.text import TfidfVectorizer
-
-# from sklearn.ensemble import RandomForestClassifier
 import pickle
-# spacy_tok
+from keras.models import load_model
+import cv2
+import numpy as np
 
 
 class NLPModel(object):
@@ -80,3 +79,18 @@ class DiamondPredictor(object):
             pickle.dump(self.predictor, f)
             print('Pickeled model at {}'.format(path))
 
+
+class CatDogPredictor(object):
+    def __init__(self):
+        cat_dog_clf_path = 'lib/models/cats_and_dogs_v1.h5'
+        self.predictor = load_model(cat_dog_clf_path)
+        # cat_dog_model.compile(loss='binary_crossentropy',
+        #     optimizer='rmsprop',
+        #     metrics=['accuracy'])
+    
+    def predict(self, img_path):
+        curr_img = cv2.imread(img_path)
+        curr_img = cv2.resize(curr_img,(150,150))
+        curr_img = np.reshape(curr_img,[1,150,150,3])
+        prediction = self.predictor.predict(curr_img)
+        return prediction 

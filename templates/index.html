@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>AI Toy Frontend</title>
-        <link href='../static/style.css' type='text/css' />
+        <link rel="stylesheet" href="../static/style.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -26,32 +26,39 @@
 
         <div class='main container'>
             <div class="row">
-                <div class="col-sm">
-                    <div class="card my-3" style="width: 18rem;">
+                <div class="col center-items">
+                    <div class="card the-items" style="width: 18rem;">
                         <img src="../static/images/sentiment.jpeg" class="card-img-top" alt="+ / -">
                         <div class="card-body">
                             <h5 class="card-title">Sentiment Classifier</h5>
                             <p class="card-text">Enter in a phrase or sentence and the model will tell you if it's negative or positive.</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><input type='text' id='sentiment-query' /></li>
+                            <li class="list-group-item"><label for='sentiment-query'>Text</label><input type='text' id='sentiment-query' /></li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" id='sentiment-submit' class="card-link">Submit</a>
-                            <p id="sentiment-answer"></p>
+                            <div class="row">
+                                <div class="col">
+                                    <p href="" id='sentiment-submit' class="card-link submit-button">Submit</p>
+                                </div>
+                                <div class="col model-response">
+                                    <p id="sentiment-answer"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="card my-3" style="width: 18rem;">
+                <div class="col center-items">
+                    <div class="card the-items" style="width: 18rem;">
                         <img src="../static/images/diamond.jpeg" class="card-img-top" alt="Diamond">
                         <div class="card-body">
                             <h5 class="card-title">Diamond Price Predictor</h5>
                             <p class="card-text">Enter the carat and cut quality of the diamond to get an estimate of the price!</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><input type='number' id='diamond-carat' /></li>
+                                <li class="list-group-item"><label for='diamond-carat'>Carat</label><input type='number' id='diamond-carat' /></li>
                             <li class="list-group-item">
+                                <label for='diamond-cut'>Cut Quality</label>
                                 <select id='diamond-cut'>
                                     <option value='1'>Bad</option>
                                     <option value='2'>Okay</option>
@@ -62,8 +69,38 @@
                             </li>
                         </ul>
                         <div class="card-body">
-                            <a href="#" id='diamond-submit' class="card-link">Submit</a>
-                            <p id="diamond-price" class="text-success"></p>
+                            <div class="row">
+                                <div class="col">
+                                    <p href="" id='diamond-submit' class="card-link submit-button">Submit</p>
+                                </div>
+                                <div class="col model-response">
+                                    <p id="diamond-price" class="text-success"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col center-items">
+                    <div class="card the-items" style="width: 18rem;">
+                        <img src="../static/images/sentiment.jpeg" class="card-img-top" alt="+ / -">
+                        <div class="card-body">
+                            <h5 class="card-title">Cat/Dog Classifier</h5>
+                            <p class="card-text">Upload an image of a cat or dog to see if the classifier can correctly identify it!</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><label for='file'>Image</label><input type='file' id='file' name='file' /></li>
+                        </ul>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p href="" id='cat-dog-submit' class="card-link submit-button">Submit</p>
+                                </div>
+                                <div class="col model-response">
+                                    <p id="cat-dog-answer"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

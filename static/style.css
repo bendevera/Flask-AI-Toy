@@ -1,0 +1,62 @@
+.center-items {
+    text-align: center;
+}
+
+.the-items {
+    display: inline-block;
+    margin: 1em auto;
+    border: 2px solid black;
+}
+
+.model-response {
+    border-left: 4px solid white;
+    font-weight: bold;
+    background-color: black;
+}
+
+li label {
+    display:block;
+    font-size: .75em;
+    color: black;
+    width: 100%;
+    float: left;
+    text-align: left;
+    font-weight: 700;
+}
+
+li input {
+    display: block;
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+li select {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.submit-button {
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+
+.card-title {
+    float: left;
+    text-align: left;
+    display: block;
+    width: 100%;
+    font-weight: 700;
+}
+
+.card-body {
+    float: left;
+    text-align: left;
+    display: block;
+    width: 100%;
+    font-weight: 100;
+    background-color: #343a40;
+    color: white;
+}
